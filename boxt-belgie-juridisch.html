@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belgisch Energie Platform — Juridische Opzet</title>
+  <style>
+    :root {
+      --bg: #f8f9fc;
+      --surface: #ffffff;
+      --surface2: #f1f3f8;
+      --border: #e2e6f0;
+      --accent: #2563eb;
+      --accent2: #7c3aed;
+      --green: #16a34a;
+      --red: #dc2626;
+      --yellow: #d97706;
+      --text: #111827;
+      --muted: #6b7280;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      padding: 4rem 2rem 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* RISK CARDS */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .risk-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .risk-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .risk-card.high::before { background: var(--red); }
+    .risk-card.medium::before { background: var(--yellow); }
+    .risk-card.low::before { background: var(--green); }
+
+    .risk-level {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .risk-card.high .risk-level { color: var(--red); }
+    .risk-card.medium .risk-level { color: var(--yellow); }
+    .risk-card.low .risk-level { color: var(--green); }
+
+    .risk-card h3 {
+      font-size: 0.93rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .risk-card p {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .law-ref {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: rgba(37, 99, 235, 0.07);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* STRUCTURE DIAGRAM */
+    .structure-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .flow-arrow {
+      color: var(--muted);
+      font-size: 1.4rem;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .diagram-node {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+    }
+
+    .diagram-node.primary {
+      border-color: var(--accent);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .diagram-node.customer {
+      border-color: var(--green);
+      background: rgba(22, 163, 74, 0.05);
+    }
+
+    .diagram-node.installer {
+      border-color: var(--accent2);
+      background: rgba(124, 58, 237, 0.05);
+    }
+
+    .node-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .node-name {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .diagram-node.primary .node-name { color: var(--accent); }
+    .diagram-node.customer .node-name { color: var(--green); }
+    .diagram-node.installer .node-name { color: var(--accent2); }
+
+    .node-desc {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .two-layer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .layer-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .layer-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .layer-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .layer-badge {
+      display: inline-block;
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .layer-badge.blue {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--accent);
+    }
+
+    .layer-badge.purple {
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--accent2);
+    }
+
+    /* PLAN STEPS */
+    .plan-steps { position: relative; }
+
+    .plan-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .plan-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 56px;
+      bottom: -1.5rem;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    .step-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .step-title {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .step-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .step-badge.now {
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(22, 163, 74, 0.25);
+    }
+
+    .step-badge.soon {
+      background: rgba(217, 119, 6, 0.1);
+      color: var(--yellow);
+      border: 1px solid rgba(217, 119, 6, 0.25);
+    }
+
+    .step-badge.later {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .step-desc {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .step-checklist {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+
+    .step-checklist li {
+      font-size: 0.83rem;
+      color: var(--muted);
+      padding: 3px 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .step-checklist li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.78rem;
+    }
+
+    /* CONTRACT TABLE */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .contract-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+    }
+
+    .contract-table th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .contract-table td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .contract-table tr:last-child td { border-bottom: none; }
+    .contract-table tr:hover td { background: var(--surface2); }
+    .contract-table td:first-child { font-weight: 600; }
+
+    .priority {
+      display: inline-block;
+      font-size: 0.67rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .priority.critical {
+      background: rgba(220, 38, 38, 0.08);
+      color: var(--red);
+      border: 1px solid rgba(220, 38, 38, 0.2);
+    }
+
+    .priority.important {
+      background: rgba(217, 119, 6, 0.08);
+      color: var(--yellow);
+      border: 1px solid rgba(217, 119, 6, 0.2);
+    }
+
+    .priority.standard {
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    /* BOXES */
+    .warning-box {
+      background: rgba(220, 38, 38, 0.04);
+      border: 1px solid rgba(220, 38, 38, 0.2);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .warning-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+    .warning-box h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 0.25rem;
+    }
+
+    .warning-box p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .info-box {
+      background: rgba(37, 99, 235, 0.04);
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .info-box h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-box p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* WARRANTY */
+    .warranty-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .warranty-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .warranty-card .w-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+
+    .warranty-card h4 {
+      font-size: 0.87rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .warranty-card p { font-size: 0.8rem; color: var(--muted); }
+
+    /* VAT */
+    .vat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .vat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .vat-card h4 {
+      font-size: 0.87rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .vat-rate {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .vat-card p { font-size: 0.8rem; color: var(--muted); }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer strong { color: var(--text); }
+
+    /* PRINT */
+    @media print {
+      nav { display: none; }
+      body { background: white; }
+      .risk-card, .step-content, .warranty-card, .vat-card, .structure-diagram { box-shadow: none; }
+    }
+
+    @media (max-width: 640px) {
+      .two-layer, .warranty-grid, .vat-grid { grid-template-columns: 1fr; }
+      .flow-grid { grid-template-columns: 1fr; }
+      .flow-arrow { display: none; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Belgisch Energie Platform — Juridische Gids</span>
+  <ul class="nav-links">
+    <li><a href="#risicos">Risico's</a></li>
+    <li><a href="#structuur">Structuur</a></li>
+    <li><a href="#garantie">Garantie</a></li>
+    <li><a href="#plan">Actieplan</a></li>
+    <li><a href="#contracten">Contracten</a></li>
+    <li><a href="#btw">BTW</a></li>
+    <li><a href="#financiering">Financiering</a></li>
+    <li><a href="#uk-vergelijking">UK vs België</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">België · NV · Online Energie Platform</div>
+  <h1>Juridische opzet voor uw<br/><span>thuisbatterij & warmtepomp platform</span></h1>
+  <p>Vaste online prijzen, eigen merk, 6 onafhankelijke installateurs — zonder hoofdaannemer te worden.</p>
+  <div class="hero-tags">
+    <span class="tag">Art. 30bis RSZ</span>
+    <span class="tag">Art. 402-403 WIB</span>
+    <span class="tag">Wederverkoper + Handelsagent</span>
+    <span class="tag">Back-to-back garantie</span>
+    <span class="tag">Herroepingsrecht 14 dagen</span>
+    <span class="tag">6 onafhankelijke installateurs</span>
+    <span class="tag">Financiering via bankpartner</span>
+    <span class="tag">FSMA · Boek VII WER</span>
+    <span class="tag">UK vs België vergelijking</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- RISICO'S -->
+  <section id="risicos">
+    <div class="section-label">Stap 1 — Begrijpen</div>
+    <h2>Juridische risico's die u moet vermijden</h2>
+    <p class="section-sub">Zodra uw NV als hoofdaannemer wordt beschouwd, treden deze wetten automatisch in werking — ook zonder dat u het beseft.</p>
+
+    <div class="risk-grid">
+      <div class="risk-card high">
+        <div class="risk-level">Hoog Risico</div>
+        <h3>Hoofdelijke aansprakelijkheid voor schulden van installateurs</h3>
+        <p>Als hoofdaannemer wordt uw NV hoofdelijk aansprakelijk voor de onbetaalde socialezekerheidsbijdragen van elke installateur. Als zij RSZ-schulden hebben en u heeft geen 35% ingehouden — betaalt u het verschil.</p>
+        <span class="law-ref">Art. 30bis RSZ</span>
+      </div>
+
+      <div class="risk-card high">
+        <div class="risk-level">Hoog Risico</div>
+        <h3>Inhoudingsplicht op fiscale schulden</h3>
+        <p>Dezelfde logica geldt voor onbetaalde belastingschulden. Vóór elke betaling aan een installateur moet u de databank van FOD Financiën raadplegen. Bij schulden moet u 15% inhouden en rechtstreeks doorstorten aan de fiscus.</p>
+        <span class="law-ref">Art. 402-403 WIB 92</span>
+      </div>
+
+      <div class="risk-card high">
+        <div class="risk-level">Hoog Risico</div>
+        <h3>Erkenningsplicht als aannemer</h3>
+        <p>Voor bepaalde installatiewerken moet uw NV formeel erkend zijn als aannemer. Installatie van warmtepompen en thuisbatterijen kwalificeert hoogstwaarschijnlijk als "onroerende werken" — waarvoor u een erkenning nodig heeft die u niet heeft.</p>
+        <span class="law-ref">KB 26/09/1991</span>
+      </div>
+
+      <div class="risk-card medium">
+        <div class="risk-level">Gemiddeld Risico</div>
+        <h3>Herkwalificatie door marketingtaal</h3>
+        <p>Als uw website zegt "wij installeren" in plaats van "wij regelen installatie via gecertificeerde partners", kan een rechtbank of de RSZ uw NV herkwalificeren als feitelijk hoofdaannemer — ongeacht hoe uw contracten zijn opgesteld.</p>
+        <span class="law-ref">Beginsel substance over form</span>
+      </div>
+
+      <div class="risk-card medium">
+        <div class="risk-level">Gemiddeld Risico</div>
+        <h3>Onverzekerde installateur — uw risico</h3>
+        <p>Als een installateur schade veroorzaakt (waterlek, brand, structureel) en geen geldige BA-verzekering heeft, zal de klant verhaal halen bij uw NV. Zonder contractuele vrijwaringsclausule draagt u het verlies.</p>
+        <span class="law-ref">BA Beroepsaansprakelijkheid</span>
+      </div>
+
+      <div class="risk-card low">
+        <div class="risk-level">Lager Risico — maar verplicht</div>
+        <h3>Herroepingsrecht B2C (14 dagen)</h3>
+        <p>Online B2C-verkoop vereist een herroepingsrecht van 14 dagen. Staat dit niet in uw algemene voorwaarden of wordt de klant niet correct geïnformeerd, dan kunnen contracten worden vernietigd en riskeert u boetes tot €25.000.</p>
+        <span class="law-ref">Boek VI WER · EU Richtlijn 2011/83</span>
+      </div>
+
+      <div class="risk-card low">
+        <div class="risk-level">Lager Risico — maar verplicht</div>
+        <h3>GDPR-compliance</h3>
+        <p>B2C, online, verzameling van namen/e-mails/adressen/energiedata. U heeft een privacybeleid nodig, toestemmingsstromen, bewaartermijnen en een verwerkersovereenkomst met elke installateur die klantgegevens verwerkt.</p>
+        <span class="law-ref">AVG · Belgische Gegevensbeschermingswet</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- STRUCTUUR -->
+  <section id="structuur">
+    <div class="section-label">Stap 2 — Structuur</div>
+    <h2>Het aanbevolen model</h2>
+    <p class="section-sub">Splits elke transactie in twee juridische lagen. Uw NV is wederverkoper én handelsagent — nooit hoofdaannemer.</p>
+
+    <div class="structure-diagram">
+      <div class="flow-grid">
+        <div class="diagram-node customer">
+          <div class="node-label">Klant</div>
+          <div class="node-name">Koper</div>
+          <div class="node-desc">Betaalt volledig online<br/>Ziet alleen uw merk</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="diagram-node primary">
+          <div class="node-label">Uw NV</div>
+          <div class="node-name">Platform</div>
+          <div class="node-desc">Ontvangt betaling<br/>Wederverkoper + Agent</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="diagram-node installer">
+          <div class="node-label">Uw Netwerk</div>
+          <div class="node-name">6 Installateurs</div>
+          <div class="node-desc">Onafhankelijke BV/eenmanszaken<br/>Feitelijke aannemers voor de werken</div>
+        </div>
+      </div>
+
+      <div class="two-layer">
+        <div class="layer-card">
+          <span class="layer-badge blue">Laag 1 — Verkoopcontract</span>
+          <h4>Uw NV verkoopt het toestel</h4>
+          <p>De klant koopt de thuisbatterij of warmtepomp van uw NV. Standaard verkoopcontract (B2C). U koopt van fabrikant/distributeur en verkoopt door met marge. Geen aannemersstatus — pure handel.</p>
+        </div>
+        <div class="layer-card">
+          <span class="layer-badge purple">Laag 2 — Agentuur voor installatie</span>
+          <h4>Uw NV treedt op als bekende agent</h4>
+          <p>Uw NV regelt de installatie <em>namens de klant</em> via een gecertificeerde installateur uit uw netwerk. U int de installatiekost als agent. De installateur blijft de juridische aannemer voor de werken. Art. 30bis is niet van toepassing op uw NV.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <div class="info-box">
+        <span class="warning-icon">💡</span>
+        <div>
+          <h4>Waarom "bekende agent" juridisch cruciaal is</h4>
+          <p>Naar Belgisch recht handelt een bekende handelsagent namens een bekende principaal. Wanneer uw NV installatiekosten int als agent voor de installateur, is de juridische relatie voor de werken: installateur → klant. Uw NV is de coördinator, niet de aannemer.</p>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <span class="warning-icon">⚠️</span>
+        <div>
+          <h4>Zeg nooit "wij installeren" in uw marketing</h4>
+          <p>Uw website, app en alle klantcommunicatie moet zeggen "wij regelen installatie via gecertificeerde partners" — niet "wij installeren". Rechtbanken en de RSZ kijken naar hoe u zich presenteert, niet alleen naar hoe uw contracten zijn opgesteld. Één onzorgvuldige zin op uw homepage kan uw volledige structuur herkwalificeren.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- GARANTIE -->
+  <section id="garantie">
+    <div class="section-label">Stap 3 — Garantie</div>
+    <h2>Back-to-back garantiestroom</h2>
+    <p class="section-sub">U biedt de klant een duidelijke commerciële garantie. Installateurs spiegelen deze contractueel. U bent de eerste lijn, zij de buffer.</p>
+
+    <div class="warranty-grid">
+      <div class="warranty-card">
+        <div class="w-icon">🏠</div>
+        <h4>Klant wendt zich tot uw NV</h4>
+        <p>Commerciële garantie op toestel + installatiekwaliteit. U beheert klachten en stuurt installateur voor herstel.</p>
+      </div>
+      <div class="warranty-card">
+        <div class="w-icon">🔁</div>
+        <h4>Uw NV verhaalt op installateur</h4>
+        <p>De samenwerkingsovereenkomst verplicht de installateur defecten te verhelpen. De back-to-back vrijwaringsclausule treedt in werking.</p>
+      </div>
+      <div class="warranty-card">
+        <div class="w-icon">🛡️</div>
+        <h4>Verzekering installateur betaalt</h4>
+        <p>Voor materiële schade of claims van derden dekt de BA beroepsaansprakelijkheid van de installateur de blootstelling. U eist bewijs vóór onboarding.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 1rem;">
+      <div class="info-box">
+        <span class="warning-icon">📋</span>
+        <div>
+          <h4>Verplicht in uw Samenwerkingsovereenkomst met installateurs</h4>
+          <p>Elke installateur moet: (1) een geldige BA beroep-verzekering hebben met minimale dekking €500.000+, (2) jaarlijks bewijs van verzekering aanleveren, (3) uw klantgarantievoorwaarden contractueel spiegelen, (4) reageren op garantieclaims binnen 5 werkdagen, (5) uw NV vrijwaren voor alle claims die voortvloeien uit hun installatiewerk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ACTIEPLAN -->
+  <section id="plan">
+    <div class="section-label">Stap 4 — Uitvoeren</div>
+    <h2>Actieplan</h2>
+    <p class="section-sub">Gerangschikt op prioriteit. Ga niet live zonder de punten met "kritiek" af te ronden.</p>
+
+    <div class="plan-steps">
+
+      <div class="plan-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Laat uw model valideren door een Belgische advocaat</span>
+            <span class="step-badge now">Eerst doen</span>
+          </div>
+          <p class="step-desc">Schrijf geen enkel contract vóór een Belgische handels- of bouwadvocaat het wederverkoper + agentmodel bevestigt in uw specifieke context. De analyse van art. 30bis RSZ is feitspecifiek — uw advocaat moet beoordelen hoe u daadwerkelijk zult opereren.</p>
+          <ul class="step-checklist">
+            <li>Briefingdocument: deel dit document + uw geplande klantreis</li>
+            <li>Vraag specifiek naar toepasselijkheid art. 30bis RSZ op het agentuurmodel</li>
+            <li>Vraag naar kwalificatie als "onroerende werken" voor batterij- en warmtepomp-installaties</li>
+            <li>Budget: €1.500–3.000 voor dit advies</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Stel de Samenwerkingsovereenkomst met installateurs op</span>
+            <span class="step-badge now">Kritiek</span>
+          </div>
+          <p class="step-desc">Dit is uw belangrijkste document. Het regelt de relatie tussen uw NV en alle 6 installateurs. Moet getekend zijn vóór elke installatie plaatsvindt.</p>
+          <ul class="step-checklist">
+            <li>Definieer de agentuurrelatie expliciet (NV treedt op als handelsagent)</li>
+            <li>Back-to-back garantieclausule (installateur spiegelt klantgarantie)</li>
+            <li>Verplichte BA-verzekering: minimale dekking + jaarlijks vernieuwingsbewijs</li>
+            <li>Prijzen en commissiestructuur</li>
+            <li>Kwaliteitsnormen + SLA's voor responstijd</li>
+            <li>Exclusiviteits- of niet-exclusiviteitsbepalingen</li>
+            <li>Opzeggingsbepalingen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Stel Algemene Voorwaarden voor klanten op</span>
+            <span class="step-badge now">Kritiek</span>
+          </div>
+          <p class="step-desc">Uw AV bepalen met wie de klant juridisch een contract sluit en waarvoor. De tweelaagsstructuur moet transparant zijn voor de klant.</p>
+          <ul class="step-checklist">
+            <li>Vermeld duidelijk dat NV verkoper van toestel EN bekende agent voor installatie is</li>
+            <li>Herroepingsrecht 14 dagen — met duidelijke uitzonderingen (installatie gestart)</li>
+            <li>Betalingsvoorwaarden en terugbetalingsbeleid</li>
+            <li>Garantievoorwaarden (scope commerciële garantie)</li>
+            <li>Aansprakelijkheidsbeperking</li>
+            <li>Toepasselijk recht: Belgisch recht, bevoegde rechtbanken</li>
+            <li>Beschikbaar vóór contractsluiting, in NL/FR afhankelijk van regio klant</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Laat BTW-stromen structureren door een accountant</span>
+            <span class="step-badge now">Kritiek</span>
+          </div>
+          <p class="step-desc">Verkoop van toestellen en installatiekost hebben verschillende BTW-tarieven en factuurlogica. Fouten leiden tot retroactieve BTW-correcties en boetes.</p>
+          <ul class="step-checklist">
+            <li>Toestel (batterij/warmtepomp): doorgaans 21% BTW</li>
+            <li>Installatie warmtepomp: mogelijks 6% BTW (voorwaarden van toepassing)</li>
+            <li>Agentuurcommissie van uw NV: BTW-behandeling verduidelijken</li>
+            <li>Twee factuurstromen vs. één factuur aan klant — beslis voor de lancering</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">GDPR-compliance opzetten</span>
+            <span class="step-badge soon">Vóór lancering</span>
+          </div>
+          <p class="step-desc">B2C + online + energiedata = volledige AVG-scope. Basiscompliance is niet onderhandelbaar vóór go-live.</p>
+          <ul class="step-checklist">
+            <li>Privacybeleid op uw website (NL + FR)</li>
+            <li>Cookie-toestemmingsbanner (indien gebruik van analytics/marketingpixels)</li>
+            <li>Verwerkersovereenkomst met elke installateur (zij zien klantgegevens)</li>
+            <li>Bewaartermijnen voor klantgegevens bepalen</li>
+            <li>Registreren bij Belgische Gegevensbeschermingsautoriteit indien grote volumes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Verzekering installateurs controleren + overeenkomsten tekenen</span>
+            <span class="step-badge soon">Vóór eerste installatie</span>
+          </div>
+          <p class="step-desc">Verifieer alle 6 installateurs vóór ze ook maar één klus uitvoeren onder uw merk.</p>
+          <ul class="step-checklist">
+            <li>Huidig BA beroepsaansprakelijkheidsattest opvragen bij alle 6</li>
+            <li>Minimale dekkingsbedragen verifiëren</li>
+            <li>RSZ- en belastingstatus controleren (via FOD-portalen)</li>
+            <li>Samenwerkingsovereenkomst tekenen met elk van hen</li>
+            <li>Agenda-herinnering instellen voor jaarlijkse verzekeringsvernieuwing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Marketing- en producttaal controleren</span>
+            <span class="step-badge soon">Vóór lancering</span>
+          </div>
+          <p class="step-desc">Elk contactpunt moet de juridische realiteit weerspiegelen. Dit is niet cosmetisch — het is uw primaire verdediging tegen herkwalificatie als aannemer.</p>
+          <ul class="step-checklist">
+            <li>Website: "wij regelen installatie via gecertificeerde partners" — niet "wij installeren"</li>
+            <li>Facturen: verkoopfactuur toestel van NV + aparte verwijzing naar installateur</li>
+            <li>Bevestigingsmails: duidelijke verwijzing naar installateur als aannemer voor de werken</li>
+            <li>Garantiedocumentatie: NV = commercieel garant, installateur = garantie op werken</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">8</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Eigen aansprakelijkheidsverzekering NV afsluiten</span>
+            <span class="step-badge later">Fase 2</span>
+          </div>
+          <p class="step-desc">Zelfs met de juiste structuur draagt uw NV commerciële blootstelling. Bescherm haar correct.</p>
+          <ul class="step-checklist">
+            <li>BA uitbating (bedrijfsaansprakelijkheid) voor uw NV</li>
+            <li>Beroepsaansprakelijkheid / E&O-dekking</li>
+            <li>Productaansprakelijkheid (u verkoopt hardware door)</li>
+            <li>Spreek met een makelaar gespecialiseerd in platform/intermediairbedrijven</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTRACTEN -->
+  <section id="contracten">
+    <div class="section-label">Stap 5 — Contracten</div>
+    <h2>Sleuteldocumenten die u nodig heeft</h2>
+    <p class="section-sub">Elk document hieronder moet door uw Belgische advocaat worden gereviewed vóór gebruik.</p>
+
+    <div class="table-wrap">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Met wie</th>
+            <th>Doel</th>
+            <th>Prioriteit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Samenwerkingsovereenkomst installateurs</td>
+            <td>Elk van de 6 installateurs</td>
+            <td>Definieert agentuurrelatie, back-to-back garantie, verzekeringsvereisten, prijzen, kwaliteitsnormen</td>
+            <td><span class="priority critical">Kritiek</span></td>
+          </tr>
+          <tr>
+            <td>Algemene Voorwaarden klanten</td>
+            <td>Alle klanten (B2C)</td>
+            <td>Regelt verkoopcontract + agentuur voor installatie, herroepingsrecht, garantie, aansprakelijkheidslimiet</td>
+            <td><span class="priority critical">Kritiek</span></td>
+          </tr>
+          <tr>
+            <td>Privacybeleid</td>
+            <td>Alle klanten (publiek)</td>
+            <td>AVG-compliance — datacategorieën, bewaartermijnen, rechten, contactgegevens</td>
+            <td><span class="priority critical">Kritiek</span></td>
+          </tr>
+          <tr>
+            <td>Verwerkersovereenkomst (DPA)</td>
+            <td>Elke installateur + SaaS-tools</td>
+            <td>AVG Art. 28 — installateur verwerkt klantgegevens namens u tijdens installatie</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td>Leveranciers-/distributieovereenkomst</td>
+            <td>Fabrikanten batterijen + warmtepompen</td>
+            <td>Regelt uw aankoopvoorwaarden, doorstroom productgarantie, retourbeleid</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td>NDA-template</td>
+            <td>Nieuwe commerciële partners</td>
+            <td>Standaard wederzijdse NDA voor gesprekken met nieuwe installateurs, leveranciers, investeerders</td>
+            <td><span class="priority standard">Standaard</span></td>
+          </tr>
+          <tr>
+            <td>Bankpartnerovereenkomst</td>
+            <td>Bankpartner</td>
+            <td>Commerciële afspraken, commissiestructuur, FSMA-registratie als verbonden kredietagent, ESIS-verantwoordelijkheid</td>
+            <td><span class="priority critical">Kritiek (bij financiering)</span></td>
+          </tr>
+          <tr>
+            <td>Addendum AV — Financiering</td>
+            <td>Alle klanten die financieren</td>
+            <td>Naam en adres kredietgever, herroepingsrecht krediet, vergoeding kredietagent, verwijzing naar ESIS</td>
+            <td><span class="priority critical">Kritiek (bij financiering)</span></td>
+          </tr>
+          <tr>
+            <td>Kredietreclame-template</td>
+            <td>Intern + bankpartner</td>
+            <td>Gevalideerde reclametekst met verplichte vermeldingen (JKP, looptijd, maandbedrag, totaalbedrag, naam kredietgever)</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- BTW -->
+  <section id="btw">
+    <div class="section-label">Stap 6 — Fiscaal</div>
+    <h2>BTW-tarieven om te kennen</h2>
+    <p class="section-sub">Laat uw accountant de exacte toepasselijkheid bevestigen vóór u iemand factureert. Verkeerde BTW = retroactieve correctie + boetes.</p>
+
+    <div class="vat-grid">
+      <div class="vat-card">
+        <h4>Thuisbatterij (hardware)</h4>
+        <div class="vat-rate">21%</div>
+        <p>Standaardtarief van toepassing op de verkoop van batterij-units. Geen verlaagd tarief voor standalone apparatuurverkoop.</p>
+      </div>
+      <div class="vat-card">
+        <h4>Warmtepomp (hardware)</h4>
+        <div class="vat-rate">21%</div>
+        <p>Standaardtarief op apparatuur. Opgelet: gecombineerde levering + installatie in woningen ouder dan 10 jaar kan mogelijk in aanmerking komen voor verlaagd tarief — bevestig met accountant.</p>
+      </div>
+      <div class="vat-card">
+        <h4>Installatie warmtepomp</h4>
+        <div class="vat-rate">6%</div>
+        <p>Mogelijk 6% BTW op installatiediensten voor privéwoningen ouder dan 10 jaar. Voorwaarden van toepassing (privégebruik, leeftijd gebouw, factuurformulering). Controleer per opdracht.</p>
+      </div>
+      <div class="vat-card">
+        <h4>Agentuurcommissie van uw NV</h4>
+        <div class="vat-rate">21%</div>
+        <p>Uw intermediaire/agentuurvergoeding is een B2B-dienst — standaard 21% BTW. De installateur factureert u voor installatie (incl. BTW), u factureert hen uw commissie.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 1rem;">
+      <div class="warning-box">
+        <span class="warning-icon">⚠️</span>
+        <div>
+          <h4>Twee factuurstromen — beslis vóór de lancering</h4>
+          <p>Ofwel ontvangt de klant één factuur van uw NV (betere UX, complexere BTW) of twee facturen (apparatuur van NV + installatie van installateur). Uw accountant moet dit bepalen op basis van hoe u de agentuurvergoeding wilt laten lopen. Improviseer dit niet bij de lancering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- FINANCIERING -->
+  <section id="financiering">
+    <div class="section-label">Stap 7 — Financiering</div>
+    <h2>Financiering via bankpartner</h2>
+    <p class="section-sub">U financiert niet zelf. U verwijst klanten naar een bankpartner die de lening verstrekt. Dit lijkt eenvoudig — maar raakt aan streng gereglementeerde wetgeving.</p>
+
+    <div class="structure-diagram" style="margin-bottom: 1.5rem;">
+      <div class="flow-grid">
+        <div class="diagram-node customer">
+          <div class="node-label">Klant</div>
+          <div class="node-name">B2C Koper</div>
+          <div class="node-desc">Kiest "Betaal in schijven"<br/>op uw checkout</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="diagram-node primary">
+          <div class="node-label">Uw NV</div>
+          <div class="node-name">Verbonden Kredietagent</div>
+          <div class="node-desc">Introduceert klant bij bank<br/>Ontvangt volledige betaling van bank</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="diagram-node" style="border-color: var(--yellow); background: rgba(217,119,6,0.05);">
+          <div class="node-label">Bankpartner</div>
+          <div class="node-name" style="color: var(--yellow);">[Bank NV]</div>
+          <div class="node-desc">Beoordeelt kredietwaardigheid<br/>Verstrekt lening · Beheert aflossingen</div>
+        </div>
+      </div>
+      <div class="two-layer" style="margin-top: 1.5rem;">
+        <div class="layer-card">
+          <span class="layer-badge blue">Wat de bank doet</span>
+          <h4>Alle gereglementeerde kredietactiviteit</h4>
+          <p>Bank beoordeelt solvabiliteit, verstrekt ESIS aan klant, sluit kredietovereenkomst af, int maandelijkse aflossingen. U bent geen kredietverstrekker.</p>
+        </div>
+        <div class="layer-card">
+          <span class="layer-badge purple">Wat uw NV doet</span>
+          <h4>Introduceren + faciliteren</h4>
+          <p>U presenteert de financieringsoptie op de checkout, verwijst klant naar bank, ontvangt het volledige factuurbedrag van de bank zodra het krediet definitief is. U verdient een introductievergoeding.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="risk-grid" style="margin-bottom: 1.5rem;">
+      <div class="risk-card high">
+        <div class="risk-level">Hoog Risico</div>
+        <h3>FSMA-registratie als kredietbemiddelaar</h3>
+        <p>Zelfs als u "alleen verwijst" en de bank alle gereglementeerde activiteit uitvoert, kwalificeert u als kredietbemiddelaar onder Boek VII WER. De veiligste oplossing: de bank registreert u als haar <strong>verbonden kredietagent</strong> bij FSMA. Zo valt de regulatoire verantwoordelijkheid bij de bank — u heeft geen aparte FSMA-licentie nodig.</p>
+        <span class="law-ref">Boek VII WER · FSMA · KB 21/06/2011</span>
+      </div>
+      <div class="risk-card high">
+        <div class="risk-level">Hoog Risico</div>
+        <h3>Verplichte vermeldingen in kredietreclame</h3>
+        <p>Toont u "vanaf €X/maand" op uw website, dan verplicht Belgisch recht u ook het JKP (jaarlijks kostenpercentage), het totale terugbetalingsbedrag, de looptijd en het maandbedrag in een gestandaardiseerd formaat te vermelden. Ontbrekende vermeldingen = administratieve sancties van de FOD Economie.</p>
+        <span class="law-ref">Art. VII.67 WER · EU Richtlijn 2008/48</span>
+      </div>
+      <div class="risk-card medium">
+        <div class="risk-level">Gemiddeld Risico</div>
+        <h3>Bedenktermijn krediet vs. start installatie</h3>
+        <p>De klant heeft 14 dagen herroepingsrecht op de kredietovereenkomst. Start u de installatie binnen die termijn en de klant trekt het krediet in, heeft u een geïnstalleerde installatie zonder betaling. Stem uw planningsflow hierop af: bevestig installatie pas na definitief worden van het krediet.</p>
+        <span class="law-ref">Art. VII.96 WER · EU Richtlijn 2008/48</span>
+      </div>
+      <div class="risk-card medium">
+        <div class="risk-level">Gemiddeld Risico</div>
+        <h3>Verbod op koppelverkoop</h3>
+        <p>U mag de aankoop van uw product niet verplicht koppelen aan een specifieke bankpartner. Financiering moet altijd een vrije keuze zijn. Één bank als standaardoptie aanbieden mag — zolang contante betaling even toegankelijk en zichtbaar is op de checkout.</p>
+        <span class="law-ref">Art. VII.127 WER</span>
+      </div>
+      <div class="risk-card low">
+        <div class="risk-level">Lager Risico — maar verplicht</div>
+        <h3>ESIS vóór contractsluiting</h3>
+        <p>De bank moet het Europees Gestandaardiseerd Informatieblad (ESIS) aan de klant bezorgen vóór de kredietovereenkomst wordt getekend. Stem met uw bankpartner af wie dit technisch verzendt in uw checkout-flow en wanneer precies.</p>
+        <span class="law-ref">Art. VII.69 WER</span>
+      </div>
+      <div class="risk-card low">
+        <div class="risk-level">Lager Risico — maar verplicht</div>
+        <h3>Vergoeding kredietagent — verplichte disclosure</h3>
+        <p>Als uw NV een introductievergoeding of commissie ontvangt van de bank, moet dit worden meegedeeld aan de klant in de precontractuele informatie. Transparantie is wettelijk verplicht, ook als het de bank is die u betaalt — niet de klant.</p>
+        <span class="law-ref">Art. VII.78 WER</span>
+      </div>
+    </div>
+
+    <div class="plan-steps">
+
+      <div class="plan-step">
+        <div class="step-num">F1</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Bankpartner selecteren + verbonden agentschap opzetten</span>
+            <span class="step-badge now">Eerst doen</span>
+          </div>
+          <p class="step-desc">Laat de bank u registreren als verbonden kredietagent bij FSMA. Dit is de meest efficiënte weg: geen aparte FSMA-licentie voor uw NV, de bank draagt de volledige regulatoire verantwoordelijkheid.</p>
+          <ul class="step-checklist">
+            <li>Kandidaat-banken contacteren: Belfius, ING, BNP Paribas Fortis, Crelan, AXA Bank</li>
+            <li>Expliciet vragen naar het "verbonden kredietagent"-model (niet zelfstandig makelaar)</li>
+            <li>Bevestigen dat bank u als hun agent bij FSMA registreert</li>
+            <li>Introductievergoeding / commissiestructuur onderhandelen</li>
+            <li>Vragen of bank kant-en-klare ESIS- en kredietreclame-templates levert</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">F2</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Kredietreclame conform maken</span>
+            <span class="step-badge now">Kritiek voor lancering</span>
+          </div>
+          <p class="step-desc">Elke webpagina, banner of e-mail die een maandelijks bedrag toont, valt onder de strenge reclameregels voor consumentenkrediet. De FOD Economie controleert dit actief en sancties zijn niet gering.</p>
+          <ul class="step-checklist">
+            <li>Verplichte vermeldingen bij elke weergave van een maandbedrag of kredietverwijzing:</li>
+            <li>→ Representatief voorbeeld: leenbedrag + looptijd + JKP + maandelijkse betaling + totaal terug te betalen</li>
+            <li>→ Naam en adres van de kredietgever (de bank)</li>
+            <li>→ Vermelding "Geld lenen kost ook geld" of equivalent</li>
+            <li>Laat uw bankpartner alle reclameteksten valideren vóór publicatie</li>
+            <li>Implementeer een herbruikbare disclaimer-component voor uw webontwikkelaar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">F3</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Checkout-flow afstemmen: bedenktermijn vs. planningsflow</span>
+            <span class="step-badge soon">Vóór lancering</span>
+          </div>
+          <p class="step-desc">Praktisch conflict: 14 dagen bedenktermijn op het krediet vs. de verwachting van de klant om snel ingepland te worden. Kies één van de twee opties hieronder.</p>
+          <ul class="step-checklist">
+            <li>Optie A (veiligst): Installatie plannen na dag 14 — bedenktermijn verstrijkt vanzelf</li>
+            <li>Optie B: Klant doet schriftelijk afstand van bedenktermijn bij bevestiging installatie (art. VII.96 WER) — vraag bankpartner om goedgekeurde template</li>
+            <li>Bankpartner informeert uw NV zodra de kredietovereenkomst definitief is</li>
+            <li>Betalingsflow: bank betaalt uw NV het volledige factuurbedrag zodra krediet definitief</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-step">
+        <div class="step-num">F4</div>
+        <div class="step-content">
+          <div class="step-header">
+            <span class="step-title">Maandelijkse bedragen correct weergeven op de website</span>
+            <span class="step-badge soon">Ontwerp + dev</span>
+          </div>
+          <p class="step-desc">U wilt "vanaf €X/maand" tonen op productpagina's. Dit mag — maar uitsluitend met het volledige verplichte representatief voorbeeld ernaast. Nooit een maandbedrag tonen zonder context.</p>
+          <ul class="step-checklist">
+            <li>Looptijden 12–36 maanden: communiceer op basis van het meest representatieve scenario</li>
+            <li>Indicatief voorbeeld: €8.000 / 36 maanden @ ~8% JKP ≈ €250/maand, totaal ≈ €9.000</li>
+            <li>Toon altijd JKP, looptijd en totaalbedrag naast het maandbedrag</li>
+            <li>Label duidelijk als "indicatief — finale voorwaarden bepaald door [Bank]"</li>
+            <li>Laat bankpartner de representatieve JKP bevestigen vóór go-live</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <div class="info-box">
+        <span class="warning-icon">📋</span>
+        <div>
+          <h4>Extra documenten voor financiering (zie ook Contractentabel)</h4>
+          <p>(1) <strong>Bankpartnerovereenkomst</strong> — commerciële afspraken, commissie, FSMA-registratie als verbonden kredietagent; (2) <strong>ESIS-template</strong> — geleverd door bank, integreren in checkout-flow; (3) <strong>Kredietreclame-template</strong> — gevalideerd door bank, alle verplichte wettelijke vermeldingen; (4) <strong>Addendum AV klanten</strong> — financieringsoptie, herroepingsrecht krediet, naam kredietgever, vergoeding kredietagent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- UK VS BELGIE -->
+  <section id="uk-vergelijking">
+    <div class="section-label">Stap 8 — Benchmarking</div>
+    <h2>UK-concurrenten vs. uw Belgisch model</h2>
+    <p class="section-sub">Boxt.co.uk en Heatable.co.uk opereren in een fundamenteel ander juridisch kader. Kopieer hun model niet — begrijp wat u er wél uit kunt overnemen.</p>
+
+    <div class="table-wrap" style="margin-bottom: 1.75rem;">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Boxt &amp; Heatable (UK)</th>
+            <th>Uw platform (België)</th>
+            <th>Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Aannemersstructuur</strong></td>
+            <td>Directe aannemer mogelijk — eigen engineers + subcontractors vrij inzetbaar</td>
+            <td>Reseller + handelsagent verplicht — nooit hoofdaannemer worden</td>
+            <td><span class="priority critical">Kritiek verschil</span></td>
+          </tr>
+          <tr>
+            <td><strong>RSZ co-aansprakelijkheid</strong></td>
+            <td>Geen equivalent van art. 30bis RSZ in UK — geen inhoudingsplicht</td>
+            <td>Art. 30bis RSZ actief — hoofdaannemer is mede-aansprakelijk voor RSZ-schulden installateur</td>
+            <td><span class="priority critical">Kritiek verschil</span></td>
+          </tr>
+          <tr>
+            <td><strong>Financieel toezicht (krediet)</strong></td>
+            <td>FCA (Financial Conduct Authority) — Heatable FRN 805259</td>
+            <td>FSMA — verbonden kredietagent via bankpartner; geen aparte FSMA-licentie nodig</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td><strong>Gegevensbescherming</strong></td>
+            <td>UK GDPR · ICO (Information Commissioner's Office) — UK-specifiek na Brexit</td>
+            <td>EU GDPR (AVG) · GBA (Gegevensbeschermingsautoriteit) — Belgische toezichthouder</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td><strong>Consumentenbescherming</strong></td>
+            <td>Consumer Rights Act 2015 · Consumer Contracts Regulations 2013</td>
+            <td>Boek VI WER · EU Richtlijn 2011/83 · Herroepingsrecht 14 dagen</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td><strong>Consumentenkrediet</strong></td>
+            <td>Consumer Credit Act 1974 · FCA-regelgeving</td>
+            <td>Boek VII WER · FSMA · verplichte JKP-vermelding in reclame</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td><strong>Installateurscertificering</strong></td>
+            <td>Gas Safe · MCS · NAPIT · RECC · TrustMark · Which? Trusted Traders</td>
+            <td>Erkende aannemers (regionaal) · Attestimmo · sectorcertificaten (warmtepomp, elektrisch)</td>
+            <td><span class="priority standard">Opvolgen</span></td>
+          </tr>
+          <tr>
+            <td><strong>Taalvereiste</strong></td>
+            <td>Alleen Engels — geen wettelijke meertaligheidsverplichting</td>
+            <td>Nederlands + Frans verplicht op basis van regio klant</td>
+            <td><span class="priority important">Belangrijk</span></td>
+          </tr>
+          <tr>
+            <td><strong>BTW installatie</strong></td>
+            <td>5% VAT (UK reduced rate voor warmtepompen)</td>
+            <td>6% BTW (privéwoning ouder dan 10 jaar, voorwaarden) — bevestig per opdracht</td>
+            <td><span class="priority standard">Opvolgen</span></td>
+          </tr>
+          <tr>
+            <td><strong>Klachtenregeling</strong></td>
+            <td>RECC · Financial Ombudsman · Which? Trusted Traders</td>
+            <td>FOD Economie · Ombudsman Financiële Sector (bij kredietklachten)</td>
+            <td><span class="priority standard">Opvolgen</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-layer">
+      <div class="layer-card" style="border-color: var(--green);">
+        <span class="layer-badge" style="background: rgba(22,163,74,0.1); color: var(--green);">WAT U WEL KUNT OVERNEMEN</span>
+        <h4>Leren van Boxt &amp; Heatable</h4>
+        <ul class="step-checklist" style="margin-top: 0.6rem;">
+          <li>Vaste online prijzen met directe checkout — werkt uitstekend in België</li>
+          <li>Financiering integreren in de checkout (bankpartner model)</li>
+          <li>Maandelijkse bedragen tonen op productpagina's (met verplichte vermeldingen)</li>
+          <li>Klantgarantie als commercieel differentiator communiceren</li>
+          <li>Gecertificeerde installateurs als kwaliteitsbewijs naar de klant</li>
+          <li>Klachtenproces via één contactpunt (uw NV als first line)</li>
+          <li>Professioneel privacybeleid + cookiebanner implementeren</li>
+          <li>Trustpilot of gelijkwaardig reviewplatform actief inzetten</li>
+        </ul>
+      </div>
+      <div class="layer-card" style="border-color: var(--red);">
+        <span class="layer-badge" style="background: rgba(220,38,38,0.1); color: var(--red);">WAT U NIET MAG KOPIËREN</span>
+        <h4>UK-model dat niet geldt in België</h4>
+        <ul class="step-checklist" style="margin-top: 0.6rem;">
+          <li>"Wij installeren" zeggen — één zin kan u herkwalificeren als hoofdaannemer</li>
+          <li>UK T&amp;C's vertalen — Consumer Rights Act ≠ Boek VI WER</li>
+          <li>FCA-registratie als bewijs van compliance — irrelevant in België (FSMA vereist)</li>
+          <li>ICO-registratie — in België registreert u bij GBA, niet ICO</li>
+          <li>Gas Safe / MCS / NAPIT branding — UK-specifieke labels zonder waarde hier</li>
+          <li>Directe contractor-structuur zonder erkenning als aannemer (KB 26/09/1991)</li>
+          <li>Enkeltaalbeleid — altijd NL én FR voorzien op basis van klantregio</li>
+          <li>Kredietreclame zonder Belgische verplichte vermeldingen (JKP, totaalbedrag, etc.)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- DISCLAIMER -->
+  <div class="info-box">
+    <span class="warning-icon">⚖️</span>
+    <div>
+      <h4>Juridische disclaimer</h4>
+      <p>Dit document is een strategische planningsgids op basis van algemene Belgische juridische beginselen. Het vormt geen juridisch advies. Laat dit reviewen door een gekwalificeerde Belgische advocaat (handels- of bouwrecht) en een Belgische accountant vóór u contracten implementeert of live gaat. Wetgeving verandert — verifieer de toepasselijkheid van art. 30bis RSZ en art. 402-403 WIB met actuele bronnen.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Belgisch Energie Platform — Juridische Opzetgids</strong><br/>
+  Opgesteld maart 2026 · Bijgewerkt met financiering &amp; UK-vergelijking · Uitsluitend voor intern gebruik · Geen juridisch advies
+</footer>
+
+</body>
+</html>
