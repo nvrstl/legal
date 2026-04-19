@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Sober</title>
+
+  <!-- iOS Add to Home Screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Sober" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2334d399'/><stop offset='1' stop-color='%230ea5e9'/></linearGradient></defs><rect width='180' height='180' rx='40' fill='url(%23g)'/><text x='50%25' y='58%25' font-family='-apple-system,Helvetica,Arial' font-size='96' font-weight='700' fill='white' text-anchor='middle' dominant-baseline='middle'>S</text></svg>" />
+
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --bg2: #111827;
+      --card: #141b2e;
+      --border: #1f2937;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #34d399;
+      --accent2: #0ea5e9;
+      --danger: #f87171;
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      padding: calc(var(--safe-top) + 1.5rem) 1.25rem calc(var(--safe-bottom) + 1.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(52, 211, 153, 0.12), transparent 60%),
+        radial-gradient(800px 500px at 100% 100%, rgba(14, 165, 233, 0.08), transparent 60%),
+        var(--bg);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.25rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .today {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero {
+      background: linear-gradient(160deg, rgba(52, 211, 153, 0.14), rgba(14, 165, 233, 0.06));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+
+    .days {
+      font-size: clamp(4.5rem, 22vw, 7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .days-unit {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-top: 0.35rem;
+    }
+
+    .since {
+      margin-top: 1.1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .since button {
+      background: transparent;
+      color: var(--accent);
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      padding: 0.25rem 0.4rem;
+      border-radius: 6px;
+    }
+
+    .since button:active { background: rgba(52, 211, 153, 0.12); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .stat-value {
+      margin-top: 0.35rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-sub {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 0.2rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.25rem;
+    }
+
+    button.action {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s ease, background 0.15s ease;
+    }
+
+    button.action:active { transform: scale(0.98); }
+
+    button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-color: transparent;
+      color: #0b0f1a;
+    }
+
+    button.danger {
+      color: var(--danger);
+      border-color: rgba(248, 113, 113, 0.3);
+    }
+    button.danger:active { background: rgba(248, 113, 113, 0.08); }
+
+    .checked {
+      background: rgba(52, 211, 153, 0.08);
+      border-color: rgba(52, 211, 153, 0.35);
+      color: var(--accent);
+    }
+
+    dialog {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 18px;
+      padding: 1.4rem;
+      max-width: 340px;
+      width: calc(100% - 2rem);
+    }
+
+    dialog::backdrop { background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); }
+
+    dialog h3 { font-size: 1.1rem; margin-bottom: 0.6rem; }
+    dialog p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+    dialog input[type=date] {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    dialog .row { display: flex; gap: 0.5rem; }
+    dialog button {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    dialog button.confirm { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0b0f1a; border: none; }
+    dialog button.danger-confirm { background: var(--danger); color: #0b0f1a; border: none; }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">● Sober</div>
+    <div class="today" id="today"></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-label">Days sober</div>
+    <div class="days" id="days">0</div>
+    <div class="days-unit" id="daysUnit">day</div>
+    <div class="since">
+      Sober since <button id="editStart" type="button"><span id="sinceDate">—</span></button>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-label">Current streak</div>
+      <div class="stat-value" id="current">0</div>
+      <div class="stat-sub">days in a row</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Longest streak</div>
+      <div class="stat-value" id="longest">0</div>
+      <div class="stat-sub" id="longestSub">personal best</div>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="action primary" id="checkin" type="button">I'm sober today ✓</button>
+    <button class="action danger" id="slip" type="button">I had a slip — reset</button>
+  </div>
+
+  <footer>One day at a time.</footer>
+
+  <dialog id="startDialog">
+    <h3>Set sober-since date</h3>
+    <p>This is the day you started. The counter begins here.</p>
+    <input type="date" id="startInput" />
+    <div class="row">
+      <button type="button" id="startCancel">Cancel</button>
+      <button type="button" class="confirm" id="startSave">Save</button>
+    </div>
+  </dialog>
+
+  <dialog id="slipDialog">
+    <h3>Reset the counter?</h3>
+    <p>Your current streak will be saved to your longest-streak record if it's a new best. The counter restarts today.</p>
+    <div class="row">
+      <button type="button" id="slipCancel">Cancel</button>
+      <button type="button" class="danger-confirm" id="slipConfirm">Reset</button>
+    </div>
+  </dialog>
+
+  <script>
+    const KEY = 'sober.v1';
+
+    function todayISO() {
+      const d = new Date();
+      d.setHours(0, 0, 0, 0);
+      const tz = d.getTimezoneOffset() * 60000;
+      return new Date(d - tz).toISOString().slice(0, 10);
+    }
+
+    function daysBetween(fromISO, toISO) {
+      const a = new Date(fromISO + 'T00:00:00');
+      const b = new Date(toISO + 'T00:00:00');
+      return Math.floor((b - a) / 86400000);
+    }
+
+    function load() {
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (raw) return JSON.parse(raw);
+      } catch {}
+      return { startDate: todayISO(), longestStreak: 0, lastCheckIn: null };
+    }
+
+    function save(state) {
+      localStorage.setItem(KEY, JSON.stringify(state));
+    }
+
+    let state = load();
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso + 'T00:00:00').toLocaleDateString(undefined, {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+    }
+
+    function render() {
+      const today = todayISO();
+      const days = Math.max(0, daysBetween(state.startDate, today));
+      const longest = Math.max(state.longestStreak || 0, days);
+
+      document.getElementById('today').textContent = new Date().toLocaleDateString(undefined, {
+        weekday: 'short', month: 'short', day: 'numeric'
+      });
+      document.getElementById('days').textContent = days;
+      document.getElementById('daysUnit').textContent = days === 1 ? 'day' : 'days';
+      document.getElementById('sinceDate').textContent = formatDate(state.startDate);
+      document.getElementById('current').textContent = days;
+      document.getElementById('longest').textContent = longest;
+      document.getElementById('longestSub').textContent =
+        longest === days && days > 0 ? "you're at your best" : 'personal best';
+
+      const btn = document.getElementById('checkin');
+      if (state.lastCheckIn === today) {
+        btn.textContent = 'Checked in for today ✓';
+        btn.classList.add('checked');
+        btn.classList.remove('primary');
+      } else {
+        btn.textContent = "I'm sober today ✓";
+        btn.classList.add('primary');
+        btn.classList.remove('checked');
+      }
+    }
+
+    document.getElementById('checkin').addEventListener('click', () => {
+      const today = todayISO();
+      if (state.lastCheckIn === today) return;
+      state.lastCheckIn = today;
+      const days = daysBetween(state.startDate, today);
+      if (days > (state.longestStreak || 0)) state.longestStreak = days;
+      save(state);
+      render();
+    });
+
+    const startDialog = document.getElementById('startDialog');
+    document.getElementById('editStart').addEventListener('click', () => {
+      document.getElementById('startInput').value = state.startDate;
+      document.getElementById('startInput').max = todayISO();
+      startDialog.showModal();
+    });
+    document.getElementById('startCancel').addEventListener('click', () => startDialog.close());
+    document.getElementById('startSave').addEventListener('click', () => {
+      const v = document.getElementById('startInput').value;
+      if (!v) return;
+      const days = daysBetween(state.startDate, todayISO());
+      if (days > (state.longestStreak || 0)) state.longestStreak = days;
+      state.startDate = v;
+      save(state);
+      startDialog.close();
+      render();
+    });
+
+    const slipDialog = document.getElementById('slipDialog');
+    document.getElementById('slip').addEventListener('click', () => slipDialog.showModal());
+    document.getElementById('slipCancel').addEventListener('click', () => slipDialog.close());
+    document.getElementById('slipConfirm').addEventListener('click', () => {
+      const days = daysBetween(state.startDate, todayISO());
+      if (days > (state.longestStreak || 0)) state.longestStreak = days;
+      state.startDate = todayISO();
+      state.lastCheckIn = null;
+      save(state);
+      slipDialog.close();
+      render();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
